@@ -4,6 +4,10 @@
 #include <ctype.h>
 #define MAX_SIZE 255
 
+/*
+Written by Eddie Atkinson, far from my best work, but working(-ish)
+*/
+
 const char* ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char* encrypt();
 char* decrypt(char* input, int shift);
