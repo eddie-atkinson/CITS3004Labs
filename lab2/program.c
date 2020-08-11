@@ -10,12 +10,14 @@
 
 #include <stdbool.h>
 
+#define ENCRYP_LEN 32
+
 char wordx[17];
 char filex[17];
 FILE * fp;
 
 char engword[17];
-unsigned char encryp[32] = {
+unsigned char encryp[ENCRYP_LEN] = {
 0x8d,
 0x20,
 0xe5,
@@ -124,18 +126,17 @@ int do_crypt(char * outfile, unsigned char * key) {
 bool checkCipher(char* cipherFile) {
     bool keyFound = true;
     FILE* fstream = fopen(cipherFile, "rb");
-    if(fstream < 0) {
-        fprintf(stderr, "Couldn't open %s\n", cipherFile);
+    if(fstream == NULL ) {
+        fprintf(stderr, "\n");
         exit(EXIT_FAILURE);
     }
-    size_t encryp_len = strlen(encryp);
-    unsigned char cipher[encryp_len];
-    size_t read = fread(cipher, sizeof(unsigned char), encryp_len, fstream); 
-    if(read < encryp_len) {
+    unsigned char cipher[ENCRYP_LEN];
+    size_t read = fread(cipher, sizeof(unsigned char), ENCRYP_LEN, fstream);
+    if(read < ENCRYP_LEN) {
         printf("Cipher file read error, only read %ld\n", read);
-        // exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); 
     }
-    for(int i = 0; i < encryp_len; ++i) {
+    for(int i = 0; i < ENCRYP_LEN; ++i) {
         if(memcmp(&encryp[i], &cipher[i], sizeof(encryp[i])) != 0) {
             keyFound = false;
             break;
@@ -144,6 +145,7 @@ bool checkCipher(char* cipherFile) {
     fclose(fstream);
     return keyFound;
 }
+
 int main() {
     //create the main function
     //create a char length 17 (our limit)

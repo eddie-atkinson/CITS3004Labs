@@ -73,8 +73,9 @@ def decrypt_with_monoalpha(encrypted_message, monoalpha_cipher):
 
 
 # Example usage
-message = 'ATTACK AT DAWN'
-cipher = random_monoalpha_cipher()
+message = 'secret message'
+# cipher = random_monoalpha_cipher()
+cipher =  key_monoalpha_cipher("monopoly")
 ciphertext = encrypt_with_monoalpha(message, cipher)
 print(ciphertext)
 plaintext = decrypt_with_monoalpha(ciphertext, cipher)
