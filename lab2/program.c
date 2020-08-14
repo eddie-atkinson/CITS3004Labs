@@ -168,7 +168,7 @@ int main() {
         KeyGen(word, word);
         do_crypt("ciphertext.bin", word);
         if(checkCipher("ciphertext.bin") == true) {
-            printf("Correct key is %s\n", word);
+            printf("Correct key is %s\n", "done");
             break;
         }
     }
