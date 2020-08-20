@@ -110,8 +110,9 @@ void q1b3(BN_CTX* ctx) {
     BN_hex2bn(&e, "010001");
     BN_hex2bn(&n, "DCBFFE3E51F62E09CE7032E2677A78946A849DC4CDDE3A4D0CB81629242FB1A5");
     BN_hex2bn(&d, "74D806F9F3A62BAE331FFE3F0A68AFE35B3D2E4794148AACBC26AA381CD7D30D");    
-    BN_hex2bn(&c, "8C0F971DF2F3672B28811407E2DABBE1DA0FEBBBDFC7DCB67396567EA1E2493F");
-    m = decrypt(n, d, c, ctx);
+    //BN_hex2bn(&c, "8C0F971DF2F3672B28811407E2DABBE1DA0FEBBBDFC7DCB67396567EA1E2493F");
+    BN_hex2bn(&c, "24C89C26F6DA860963AF6A6CC6335ED8176A71BADF4771C7726D09E66A6BE4AB");
+     m = decrypt(n, d, c, ctx);
     printBN("Deciphered message: ", m);
     
     char *number_str = BN_bn2hex(m);
@@ -155,14 +156,16 @@ void q1b4(BN_CTX* ctx) {
 
 void q1b5(BN_CTX* ctx) {
     BIGNUM* n = BN_new(); 
-    BIGNUM* e = Bn_new();
+    BIGNUM* e = BN_new();
     BIGNUM* m = BN_new();
     BIGNUM* s = BN_new();
     BIGNUM* d_s = BN_new();
     BN_hex2bn(&m, "4c61756e63682061206d6973736c652e");
     BN_hex2bn(&e, "010001");
+    BN_hex2bn(&s, "643D6F34902D9C7EC90CB0B2BCA36C47FA37165C0005CAB026C0542CBDB6802F");
+//    BN_hex2bn(&s, "643D6F34902D9C7EC90CB0B2BCA36C47FA37165C0005CAB026C0542CBDB6803F");
     BN_hex2bn(&n, "AE1CD4DC432798D933779FBD46C6E1247F0CF1233595113AA51B450F18116115"); 
-    BN_mod_exp(d_s, m, e, n, ctx); 
+    BN_mod_exp(d_s, s, e, n, ctx); 
     printBN("Original message ", m);
     printBN("Unsigned signature: ", d_s);
     printf("Equality test: %d\n", BN_cmp(m, d_s));
@@ -173,11 +176,10 @@ void q1b5(BN_CTX* ctx) {
 int main(int argc, char** argv) {
     BN_CTX *ctx = BN_CTX_new();
 //    q1b1(ctx);
-//    q1b2(ctx);
+//      q1b2(ctx);
 //    q1b3(ctx);  
-//    q1b4(ctx);
+    q1b4(ctx);
 //    q1b5(ctx);
-    printf("File has changed\n");
     return(0);
 }
 
