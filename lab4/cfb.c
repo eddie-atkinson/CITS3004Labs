@@ -85,7 +85,12 @@ int compareAll(const char *list, const char *data, int total, int unit_len, int 
 
 	/* YOUR CODE GOES HERE */
 
-
+	for(int i = 0; i < total; ++i) {
+		if(compare(list, data, len) == 0) {
+			return i;
+		}
+		list += unit_len;
+	}
 	return -1; // no match, return -1
 }
 
