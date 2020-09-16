@@ -101,7 +101,7 @@ class Blockchain:
         """
         guess = hashlib.sha256(f"{last_proof}{proof}{last_hash}".encode()).hexdigest()
         print(guess)
-        if guess[:4] == "0000":
+        if guess[:6] == "000000":
             return True
         return False
 
@@ -122,8 +122,8 @@ class Blockchain:
         last_hash = self.hash(last_block)
 
         proof = 0
-        hash = hashlib.sha256((f"{last_proof}{proof}".encode())).hexdigest()
-        while hash[:4] != "0000":
+        hash = hashlib.sha256((f"{last_proof}{proof}{last_hash}".encode())).hexdigest()
+        while hash[:6] != "000000":
             proof += 1
             hash = hashlib.sha256((f"{last_proof}{proof}".encode())).hexdigest()
             print(f"Trying {proof}")
